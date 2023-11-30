@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="template.main.kts" type="KotlinStandaloneScriptRunConfigurationType">
+    <module name="advent-of-code-2023" />
+    <shortenClasspath name="NONE" />
+    <option name="filePath" value="$PROJECT_DIR$/template.main.kts" />
+    <method v="2" />
+  </configuration>
+</component>
