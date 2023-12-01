@@ -1,6 +1,7 @@
 #!/usr/bin/env kotlin
 
 import java.nio.file.Paths
+import kotlin.io.path.absolutePathString
 import kotlin.io.path.copyTo
 import kotlin.io.path.div
 import kotlin.io.path.name
@@ -18,7 +19,9 @@ Paths.get(".").normalize().run {
         this / "src" / "test" / "kotlin" / "Day__Test.kt",
         this / "src" / "test" / "resources" / "Day__.txt",
         this / "src" / "test" / "resources" / "Day__-sample.txt",
-    ).forEach {
+    ).onEach {
         it.copyTo(it.resolveSibling(it.name.format())).apply { writeText(readText().format()) }
+    }.forEach {
+        println(it.absolutePathString().replace("\\", "/"))
     }
 }
