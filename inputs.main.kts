@@ -6,7 +6,7 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.nio.file.Paths
 import kotlin.io.path.ExperimentalPathApi
-import kotlin.io.path.absolutePathString
+import kotlin.io.path.absolute
 import kotlin.io.path.div
 import kotlin.io.path.extension
 import kotlin.io.path.isRegularFile
@@ -24,7 +24,7 @@ val regex = """Day\d+Test\.kt""".toRegex()
     .mapNotNull { it.name.filter(Char::isDigit).toIntOrNull() }
     .distinct()
     .map { it to inputPath(day = it) }
-    .onEach { (day, path) -> println("Day $day file:///${path.absolutePathString().replace("\\", "/")}") }
+    .onEach { (day, path) -> println("Day $day ${path.absolute().toUri()}") }
     .forEach { (day, path) -> path.writeText(fetchInput(day = day)) }
 
 fun inputPath(day: Int) = Paths.get(".").normalize() / "src" / "test" / "resources" / "Day${day.toString().padStart(length = 2, padChar = '0')}.txt"
