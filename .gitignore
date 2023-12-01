@@ -1,3 +1,7 @@
+# Advent of Code inputs
+src/test/resources/*.txt
+!src/test/resources/*-sample*.txt
+
 # Created by https://www.toptal.com/developers/gitignore/api/windows,gradle,intellij,java,kotlin
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,gradle,intellij,java,kotlin
 
