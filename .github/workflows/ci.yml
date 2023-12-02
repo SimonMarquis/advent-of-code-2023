@@ -5,6 +5,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  KOTLIN_MAIN_KTS_COMPILED_SCRIPTS_CACHE_DIR: ${{ github.workspace }}/.main.kts
+
 jobs:
 
   build:
@@ -21,6 +24,13 @@ jobs:
 
       - uses: gradle/gradle-build-action@87a9a15658c426a54dd469d4fc7dc1a73ca9d4a6 # v2.10.0
       - uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
+
+      - name: Cache Kotlin scripts
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.KOTLIN_MAIN_KTS_COMPILED_SCRIPTS_CACHE_DIR }}
+          key: kts-${{ runner.os }}-${{ hashFiles('**/*.main.kts') }}
+      - run: mkdir -p "$KOTLIN_MAIN_KTS_COMPILED_SCRIPTS_CACHE_DIR"
 
       - name: 🔣 Fetching inputs…
         run: ./inputs.main.kts
