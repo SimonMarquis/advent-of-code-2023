@@ -27,7 +27,7 @@ class Day03(private val input: List<String>) {
     private infix fun IntRange.overlaps(other: IntRange) = max(first, other.first) <= min(last, other.last)
 
     fun part1() = input.schematic().map { it.toMutableList() }
-        .padded(List(2) { mutableListOf() })
+        .padded(mutableListOf())
         .windowed(3) { (above, middle, below) ->
             listOf(above, middle, below).flatMap { line ->
                 middle.symbols().flatMap { symbol -> line.removePartsInRangeOf(symbol) }
@@ -36,7 +36,7 @@ class Day03(private val input: List<String>) {
         .sumOf(Part::value)
 
     fun part2() = input.schematic()
-        .padded(List(2) { emptyList() })
+        .padded(emptyList())
         .windowed(3) { (above, middle, below) ->
             middle.symbols('*').mapNotNull { symbol ->
                 listOf(above, middle, below).flatMap { it.findPartsInRangeOf(symbol) }
