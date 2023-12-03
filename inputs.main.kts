@@ -11,6 +11,7 @@ import kotlin.io.path.div
 import kotlin.io.path.extension
 import kotlin.io.path.isRegularFile
 import kotlin.io.path.name
+import kotlin.io.path.notExists
 import kotlin.io.path.walk
 import kotlin.io.path.writeText
 
@@ -24,6 +25,7 @@ val regex = """Day\d+Test\.kt""".toRegex()
     .mapNotNull { it.name.filter(Char::isDigit).toIntOrNull() }
     .distinct()
     .map { it to inputPath(day = it) }
+    .filter { (day, path) -> path.notExists() }
     .onEach { (day, path) -> println("Day $day ${path.absolute().toUri()}") }
     .forEach { (day, path) -> path.writeText(fetchInput(day = day)) }
 
