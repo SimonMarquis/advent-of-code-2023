@@ -17,11 +17,12 @@ Paths.get(".").normalize().run {
     listOf(
         this / "src" / "main" / "kotlin" / "Day__.kt",
         this / "src" / "test" / "kotlin" / "Day__Test.kt",
-        this / "src" / "test" / "resources" / "Day__.txt",
         this / "src" / "test" / "resources" / "Day__-sample.txt",
-    ).onEach {
-        it.copyTo(it.resolveSibling(it.name.format())).apply { writeText(readText().format()) }
-    }.forEach {
+    ).map {
+        it.copyTo(it.resolveSibling(it.name.format()))
+    }.onEach {
+        it.writeText(it.readText().format())
+    }.onEach {
         println(it.absolute().toUri())
     }
 }
