@@ -1,3 +1,11 @@
+import kotlin.math.absoluteValue
+
+fun <T> Sequence<T>.infinite() = sequence { while (true) yieldAll(this@infinite) }
+
+fun gcd(a: Long, b: Long): Long = if (b == 0L) a.absoluteValue else gcd(b, a % b)
+
+fun lcm(a: Long, b: Long) = (a * b) / gcd(a, b)
+
 inline fun <T, R> Sequence<T>.foldInPlace(
     initial: R,
     operation: R.(T) -> Unit,
